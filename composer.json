@@ -1,9 +1,32 @@
 {
+    "name": "imarc/monk",
+    "description": "Monk is a Wordpress project bootstrap.",
+    "homepage": "https://github.com/imarc/monk",
+    "type": "project",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Jeff Turcotte",
+            "email": "jeff.turcotte@gmail.com"
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
     "require": {
         "php": ">=5.4",
-        "johnpbloch/wordpress": "4.2"
+        "johnpbloch/wordpress": ">=4.2",
+        "wpackagist-plugin/advanced-custom-fields": ">=4.4",
+        "wpackagist-theme/bootstrap-basic": ">=1.0"
     },
     "extra": {
-        "wordpress-install-dir": "wp"
+        "installer-paths": {
+            "public/content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+            "public/content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "public/content/themes/{$name}/": ["type:wordpress-theme"]
+        },
+        "wordpress-install-dir": "public/wordpress"
     }
 }
