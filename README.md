@@ -12,4 +12,4 @@ Monk is a Wordpress starter kit. Currently it aims to:
 
 ## Installation
 
-    composer create-project imarc/monk {project-name}
+    composer create-project imarc/monk {folder-name}
