@@ -3,11 +3,12 @@
     "description": "Monk is a Wordpress project bootstrap.",
     "homepage": "https://github.com/imarc/monk",
     "type": "project",
-    "license": "Apache",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Jeff Turcotte",
             "email": "jeff.turcotte@gmail.com"
+        }
     ],
     "repositories": [
         {
@@ -17,9 +18,9 @@
     ],
     "require": {
         "php": ">=5.4",
-        "johnpbloch/wordpress": ">=4.2",
-        "wpackagist-plugin/advanced-custom-fields": ">=4.4",
-        "wpackagist-theme/bootstrap-basic": ">=1.0"
+        "johnpbloch/wordpress": "~4.2",
+        "wpackagist-plugin/advanced-custom-fields": "~4.4",
+        "wpackagist-theme/bootstrap-basic": "~1.0"
     },
     "extra": {
         "installer-paths": {
