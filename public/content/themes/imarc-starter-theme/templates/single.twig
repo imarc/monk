@@ -1,0 +1,27 @@
+{% extends "_layout.twig" %}
+
+{% block content %}
+	<div class="container">
+        <article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
+            <h2>{{ post.title }}</h2>
+            <div class="meta">
+                Posted on {{ post.post_date|date }}
+                by <a href="{{ post.author.path }}">{{ post.author.name }}</a>
+            </p>
+
+            {{ post.content }}
+
+            {% if post.comment_status != 'closed' %}
+                <footer class="comments">
+                    <h3>Comments</h3>
+
+                    {{ fn('comment_form') }}
+
+                    {% for cmt in post.get_comments() %}
+                        {% include "comment.twig" with {comment:cmt} %}
+                    {% endfor %}
+                </footer>
+            {% endif %}
+		</article>
+	</div>
+{% endblock %}
