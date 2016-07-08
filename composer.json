@@ -20,7 +20,10 @@
         "php": ">=5.4",
         "johnpbloch/wordpress": "~4.2",
         "wpackagist-plugin/advanced-custom-fields": "~4.4",
-        "wpackagist-theme/bootstrap-basic": "~1.0"
+        "wpackagist-plugin/timber-library": "^1.1",
+        "wpackagist-plugin/debug-bar": "^0.8.4",
+        "wpackagist-plugin/debug-bar-timber": "^0.3.0",
+        "roots/wp-password-bcrypt": "^1.0"
     },
     "extra": {
         "installer-paths": {
