@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html {{site.language_attributes}}>
+<head>
+    <meta charset="{{site.charset}}" />
+
+    <title>
+        {% if wp_title %}
+            {{ wp_title }} - {{ site.name }}
+        {% else %}
+            {{ site.name }}
+        {% endif %}
+    </title>
+
+    <meta name="description" content="{{ site.description }}">
+    <meta name="web_author" content="Imarc, A Digital Agency | Boston + Silicon Valley | more info at imarc.com" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ site.theme.link }}/style.css" type="text/css" media="all" />
+    <link rel="pingback" href="{{ site.pingback_url }}" />
+
+    {{ function('wp_head') }}
+</head>
+
+<body class="{{ body_class }}" data-template="_layout.twig">
+    <header class="primary">
+        <div class="container">
+            <div class="branding">
+                <h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
+            </div>
+            <div class="wrapper">
+                <nav aria-label="Primary Navigation" class="primary">
+                    {% include "menu.twig" with {'menu': menu.get_items} %}
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="torso">
+        {% if sidebar %}
+            <aside class="primary">
+                {{ sidebar }}
+            </aside>
+        {% endif %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">Copyright {{ "now"|date("Y") }}</div>
+        </div>
+    </footer>
+
+    {{ function('wp_footer') }}
+
+</body>
+</html>
