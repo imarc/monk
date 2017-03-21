@@ -1,8 +1,14 @@
 <?php
+#error_reporting(E_ALL);
+#ini_set('display_errors', 1);
 //define( 'WP_LOCAL_DEV', false );
-define( 'DB_NAME', 'wordpress');
-define( 'DB_USER', 'wordpress' );
-define( 'DB_PASSWORD', 'wordpress' );
+#define( 'WP_SITEURL', 'http://example.com/wordpress' );
+
+define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST']);
+
+define( 'DB_NAME', 'data');
+define( 'DB_USER', 'app' );
+define( 'DB_PASSWORD', 'app' );
 define( 'DB_HOST', 'db' );
 
 // ========================
@@ -46,7 +52,7 @@ define( 'WPLANG', '' );
 // Hide errors
 // ===========
 #ini_set( 'display_errors', 0 );
-define( 'WP_DEBUG_DISPLAY', false );
+define( 'WP_DEBUG_DISPLAY', true );
 
 // =================================================================
 // Debug mode

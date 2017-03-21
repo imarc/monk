@@ -4,27 +4,18 @@ services:
   db:
     image: mariadb:10
     environment:
-      - "MYSQL_DATABASE=wordpress"
-      - "MYSQL_USER=wordpress"
-      - "MYSQL_PASSWORD=wordpress"
+      - "MYSQL_DATABASE=data"
+      - "MYSQL_USER=app"
+      - "MYSQL_PASSWORD=app"
       - "MYSQL_RANDOM_ROOT_PASSWORD=yes"
 
   php:
-    image: jeffturcotte/php:latest
+    image: imarcagency/php-apache:latest
+    ports:
+      - "80:80"
     links:
       - db
     depends_on:
       - db
     volumes:
-      - "./:/var/www/"
-
-  nginx:
-    image: jeffturcotte/nginx-fastcgi:latest
-    ports:
-      - "80:80"
-    environment:
-      - "NGINX_ROOT=/var/www/public"
-    links:
-      - php
-    volumes:
-      - "./:/var/www"
+      - "./:/srv/www"
