@@ -11,6 +11,8 @@ services:
 
   php:
     image: imarcagency/php-apache:latest
+    environment:
+      - "APACHE_ROOT=/var/www/web"
     ports:
       - "80:80"
     links:
@@ -18,4 +20,4 @@ services:
     depends_on:
       - db
     volumes:
-      - "./:/srv/www"
+      - "./:/var/www"

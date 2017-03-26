@@ -1,4 +1,5 @@
+.env
 vendor
 node_modules
-public/wordpress
-public/content/plugins
+web/wordpress
+web/content/plugins

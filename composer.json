@@ -36,21 +36,19 @@
         "bin-dir": "scripts"
     },
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.6",
+        "advanced-custom-fields/advanced-custom-fields-pro": "*",
         "johnpbloch/wordpress": "~4.2",
-        "wpackagist-plugin/timber-library": "^1.1",
-        "wpackagist-plugin/debug-bar": "^0.8.4",
-        "wpackagist-plugin/debug-bar-timber": "^0.3.0",
+        "johnbillion/extended-cpts": "^3.0",
+        "johnbillion/extended-taxos": "^2.0",
+        "psy/psysh": "^0.7.2",
         "roots/wp-password-bcrypt": "^1.0",
         "wp-cli/wp-cli": "^0.24.1",
-        "psy/psysh": "^0.7.2"
+        "wpackagist-plugin/debug-bar": "^0.8.4",
+        "wpackagist-plugin/debug-bar-timber": "^0.3.0",
+        "wpackagist-plugin/timber-library": "^1.1"
     },
     "extra": {
-        "installer-paths": {
-            "public/content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-            "public/content/plugins/{$name}/": ["type:wordpress-plugin"],
-            "public/content/themes/{$name}/": ["type:wordpress-theme"]
-        },
-        "wordpress-install-dir": "public/wordpress"
+        "wordpress-install-dir": "web"
     }
 }
