@@ -1,5 +1,6 @@
 .env
 vendor
+scripts
 node_modules
-web/wordpress
-web/content/plugins
+web/wp-core
+web/wp-content/plugins

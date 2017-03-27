@@ -1,20 +1,20 @@
 <?php
-define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wordpress');
+// Site URL
+
+define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
+define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-core/');
+
+// Custom content dir
+
+define( 'WP_CONTENT_DIR', __DIR__ . '/wp-content' );
+define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content' );
+
+// Database
 
 define( 'DB_NAME', 'wordpress');
 define( 'DB_USER', 'wordpress' );
 define( 'DB_PASSWORD', 'wordpress' );
 define( 'DB_HOST', 'database' );
-
-// ========================
-// Custom Content Directory
-// ========================
-define( 'WP_CONTENT_DIR', __DIR__ . '/content' );
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
-
-// ================================================
-// You almost certainly do not want to change these
-// ================================================
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
