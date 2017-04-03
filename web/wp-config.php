@@ -1,76 +1,111 @@
 <?php
-// Site URL
+$root_dir = dirname(__DIR__);
 
-define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
-define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-core/');
+if (file_exists($root_dir . '/vendor/autoload.php')) {
+    require_once($root_dir. '/vendor/autoload.php');
+}
 
-// Custom content dir
+// load .env
 
-define( 'WP_CONTENT_DIR', __DIR__ . '/wp-content' );
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content' );
+$dotenv = new Dotenv\Dotenv($root_dir);
 
-// Database
+if (file_exists($root_dir . '/.env')) {
+    $dotenv->load();
+}
 
-define( 'DB_NAME', 'wordpress');
-define( 'DB_USER', 'wordpress' );
-define( 'DB_PASSWORD', 'wordpress' );
-define( 'DB_HOST', 'database' );
-define( 'DB_CHARSET', 'utf8' );
-define( 'DB_COLLATE', '' );
+$dotenv->required([
+    'DB_HOST',
+    'DB_NAME',
+    'DB_USER',
+    'DB_PASSWORD',
+    'WP_HOME',
+    'WP_SITEURL'
+]);
+
+// load env() helper method
+
+Env::init();
+
+// ==============================================================
+// Urls / Content Dirs
+// ==============================================================
+
+define('WP_HOME', env('WP_HOME'));
+define('WP_SITEURL', env('WP_SITEURL'));
+define('WP_CONTENT_URL', WP_HOME . '/wp-content');
+define('WP_CONTENT_DIR', __DIR__ . '/wp-content' );
+
+// ==============================================================
+// DB settings
+// ==============================================================
+
+define('DB_NAME', env('DB_NAME'));
+define('DB_USER', env('DB_USER'));
+define('DB_PASSWORD', env('DB_PASSWORD'));
+define('DB_HOST', env('DB_HOST') ?: 'localhost');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '' );
+
+$table_prefix  = env('DB_PREFIX') ?: 'wp_';
 
 // ==============================================================
 // Salts, for security
-// Grab these from: https://api.wordpress.org/secret-key/1.1/salt
 // ==============================================================
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
 
-// ==============================================================
-// Table prefix
-// Change this if you have multiple installs in the same database
-// ==============================================================
-$table_prefix  = 'wp_';
+define('AUTH_KEY', env('AUTH_KEY'));
+define('SECURE_AUTH_KEY', env('SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY', env('LOGGED_IN_KEY'));
+define('NONCE_KEY', env('NONCE_KEY'));
+define('AUTH_SALT', env('AUTH_SALT'));
+define('SECURE_AUTH_SALT', env('SECURE_AUTH_SALT'));
+define('LOGGED_IN_SALT', env('LOGGED_IN_SALT'));
+define('NONCE_SALT', env('NONCE_SALT'));
 
 // ================================
 // Language
-// Leave blank for American English
 // ================================
-define( 'WPLANG', '' );
 
-// ===========
-// Hide errors
-// ===========
-#ini_set( 'display_errors', 0 );
-define( 'WP_DEBUG_DISPLAY', true );
+define('WPLANG', '');
 
-// =================================================================
-// Debug mode
-// Debugging? Enable these. Can also enable them in local-config.php
-// =================================================================
-// define( 'SAVEQUERIES', true );
-define( 'WP_DEBUG', true );
+// =====================================
+// Dev Mode / Error handling / Debugging
+// =====================================
 
-// ======================================
-// Load a Memcached config if we have one
-// ======================================
-if ( file_exists( dirname( __FILE__ ) . '/memcached.php' ) )
-	$memcached_servers = include( dirname( __FILE__ ) . '/memcached.php' );
+define('WP_DEV_MODE', env('WP_DEV_MODE') ?: false);
 
-// ===========================================================================================
-// This can be used to programatically set the stage when deploying (e.g. production, staging)
-// ===========================================================================================
-#define( 'WP_STAGE', '%%WP_STAGE%%' );
-#define( 'STAGING_DOMAIN', '%%WP_STAGING_DOMAIN%%' ); // Does magic in WP Stack to handle staging domain rewriting
+if (WP_DEV_MODE) {
+    ini_set('display_errors', 1);
+    define('SAVEQUERIES', true);
+    define('WP_DEBUG', true);
+    define('WP_DEBUG_LOG', true);
+    define('WP_DEBUG_DISPLAY', true);
+    define('SCRIPT_DEBUG', true);
+    define('DISALLOW_FILE_MODS', false);
+    define('DISALLOW_FILE_EDIT', false);
+    define('AUTOMATIC_UPDATER_DISABLED', true);
+} else {
+    ini_set('display_errors', 0);
+    define('SAVEQUERIES', false);
+    define('WP_DEBUG', false);
+    define('WP_DEBUG_DISPLAY', false);
+    define('SCRIPT_DEBUG', false);
+    define('DISALLOW_FILE_MODS', true);
+    define('DISALLOW_FILE_EDIT', true);
+    define('AUTOMATIC_UPDATER_DISABLED', true);
+}
+
+// ==========
+// Cron
+// ==========
+
+define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 
 // ===================
 // Bootstrap WordPress
 // ===================
-if ( !defined( 'ABSPATH' ) )
-	define( 'ABSPATH', dirname( __FILE__ ) . '/wordpress/' );
+
+if (!defined('ABSPATH')) {
+    define('ABSPATH', dirname( __FILE__ ) . '/wordpress/');
+}
+
 require_once( ABSPATH . 'wp-settings.php' );

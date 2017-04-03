@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  php:
+    ports:
+      - "80:80"
+
+  mysql:
+    image: "mysql:8.0"
+    environment:
+      - "MYSQL_DATABASE=wordpress"
+      - "MYSQL_USER=wordpress"
+      - "MYSQL_PASSWORD=wordpress"
+      - "MYSQL_RANDOM_ROOT_PASSWORD=yes"
+    volumes:
+      - "mysql:/var/lib/mysql"
+
+volumes:
+  mysql:
+
