@@ -1,4 +1,5 @@
 .env
+.data
 vendor
 scripts
 node_modules
