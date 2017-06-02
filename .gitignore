@@ -5,3 +5,4 @@ scripts
 node_modules
 web/wp-core
 web/wp-content/plugins
+web/wp-content/uploads
