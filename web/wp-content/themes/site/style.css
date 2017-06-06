@@ -1,5 +1,5 @@
 /*
-Theme Name: Monk Theme
+Theme Name: Site Theme
 Theme URI: http://github.com/imarc/monk
 Author: Imarc
 Author URI: https://www.imarc.com/
@@ -8,4 +8,7 @@ Version: 1.0
 License: Apache
 */
 
-@import "css/styles.css";
+/*
+THIS IS FOR THE THEME SYSTEM ONLY!
+DO NOT USE THIS FILE FOR ANY REAL CSS
+*/
